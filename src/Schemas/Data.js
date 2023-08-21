@@ -56,7 +56,7 @@ export const Data = {
     works: [
       {
         title: "BACKEND DEVELOPER",
-        period: "Aug. 2022 - Actual",
+        period: "Aug. 2022 - Currently",
         company: "Sensedia",
         description: [
           "Development of microservices with JavaScript and Node.js",
@@ -94,7 +94,7 @@ export const Data = {
       {
         name: "PagoNxt Merchant Solutions",
         company: "Santander",
-        period: "Aug. 2022 - Actual",
+        period: "Aug. 2022 - Currently",
         description: [
           "The project involves creating microservices using NodeJS and Javascript, exposing routes in the Apigee API Gateway, creating Swagger API documentation, and providing consultancy on solutions for partners",
         ],
