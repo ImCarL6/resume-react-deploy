@@ -33,7 +33,7 @@ export const Resume = () => {
       <main className="l-main bd-container" id="bd-container">
         <div className="resume" id="area-cv">
           <div className="resume__left">
-            <Profile {...profile} />
+            <Profile {...profile} {...socialMedia} isMobileView={!matches} />
             <AboutMe {...aboutMe} />
             <Skills {...skills} />
             <SocialMedia {...socialMedia} />

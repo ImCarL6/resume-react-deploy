@@ -30,7 +30,7 @@
   /*========== Margenes ==========*/
   --mb-1: 0.5rem;
   --mb-2: 1rem;
-  --mb-3: 1.5rem;
+  --mb-3: 0.7rem;
 
   /*========== z index ==========*/
   --z-tooltip: 10;
@@ -125,7 +125,7 @@ body.dark-theme {
 
 /*========== CSS CLASS ==========*/
 .section {
-  padding: 1.5rem 0;
+  padding: 1.3rem 0;
 }
 
 .section-title {
@@ -534,5 +534,35 @@ body.dark-theme {
     animation: none;
     transform: scale(1);
     transition: none;
+  }
+
+  .generate__container {
+    gap: 1rem;
+    display: inline-grid;
+    text-align: center;
+  }
+  
+  .generate__btn {
+    display: inline-block;
+    border: 2px solid var(--text-color);
+    color: var(--title-color);
+    padding: 1rem 2rem;
+    border-radius: 0.25rem;
+    transition: 0.3s;
+    font-weight: var(--font-medium);
+  }
+  
+  .generate__btn:hover {
+    background-color: var(--text-color);
+    color: var(--container-color);
+  }
+  
+  button.generate__btn {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    font-family: var(--body-font);
   }
 }
