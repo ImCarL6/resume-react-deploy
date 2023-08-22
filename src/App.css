@@ -181,6 +181,29 @@ body.dark-theme {
     z-index: var(--z-fixed);
     transition: 0.3s;
   }
+
+  @keyframes pulse-aura {
+    0% {
+      transform: scale(1); /* Normal scale */
+    }
+    50% {
+      transform: scale(1.4); /* Enlarge to create the pulse effect */
+    }
+    100% {
+      transform: scale(1); /* Back to normal scale */
+    }
+  }
+
+  .pulse-aura {
+    animation: pulse-aura 5s infinite; /* Apply the animation to the button */
+    animation-delay: 0s; /* Same animation delay for both buttons */
+  }
+
+  .reset-animation {
+    animation: none; /* Remove the current animation */
+    transform: scale(1); /* Reset the scale to normal */
+    transition: none; /* Remove transition effects */
+  }
 }
 
 .nav__logo,
@@ -252,7 +275,7 @@ body.dark-theme {
   overflow: hidden;
 }
 
-.home__img:hover{
+.home__img:hover {
   width: 180px;
   height: 180px;
   border-radius: 50%;
@@ -464,5 +487,39 @@ body.dark-theme {
 
   .home__container {
     gap: 1.5rem;
+  }
+
+  @keyframes pulse-aura {
+    0% {
+      transform: scale(1); /* Normal scale */
+    }
+    50% {
+      transform: scale(1.2); /* Enlarge to create the pulse effect */
+    }
+    100% {
+      transform: scale(1); /* Back to normal scale */
+    }
+  }
+
+  .pulse-aura {
+    animation: pulse-aura 5s infinite; /* Apply the animation to the button */
+    animation-delay: 0s; /* Same animation delay for both buttons */
+  }
+
+  .button-indicator {
+    display: inline-block;
+    padding: 0.2rem 0.5rem; /* Adjust padding as needed */
+    border: 2px solid var(--text-color); /* Border style */
+    border-radius: 0.25rem; /* Rounded corners */
+  }
+  
+  .button-indicator:hover {
+    border-color: var(--title-color); /* Border color on hover */
+  }
+
+  .reset-animation {
+    animation: none; /* Remove the current animation */
+    transform: scale(1); /* Reset the scale to normal */
+    transition: none; /* Remove transition effects */
   }
 }
