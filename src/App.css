@@ -491,35 +491,48 @@ body.dark-theme {
 
   @keyframes pulse-aura {
     0% {
-      transform: scale(1); /* Normal scale */
+      transform: scale(1);
     }
     50% {
-      transform: scale(1.2); /* Enlarge to create the pulse effect */
+      transform: scale(1.2);
     }
     100% {
-      transform: scale(1); /* Back to normal scale */
+      transform: scale(1);
     }
   }
 
   .pulse-aura {
-    animation: pulse-aura 5s infinite; /* Apply the animation to the button */
-    animation-delay: 0s; /* Same animation delay for both buttons */
+    animation: pulse-aura 5s infinite;
+    animation-delay: 0s;
   }
 
   .button-indicator {
     display: inline-block;
-    padding: 0.2rem 0.5rem; /* Adjust padding as needed */
-    border: 2px solid var(--text-color); /* Border style */
-    border-radius: 0.25rem; /* Rounded corners */
+    padding: 0.2rem 0.5rem;
+    border: 2px solid var(--text-color);
+    border-radius: 0.25rem;
+    transition: border-color 0.3s;
   }
   
   .button-indicator:hover {
-    border-color: var(--title-color); /* Border color on hover */
+    border-color: var(--title-color);
   }
 
   .reset-animation {
-    animation: none; /* Remove the current animation */
-    transform: scale(1); /* Reset the scale to normal */
-    transition: none; /* Remove transition effects */
+    animation: none;
+    transform: scale(1);
+    transition: none;
+  }
+
+  .start-animation.pulse-aura {
+    animation: pulse-aura 5s infinite;
+    animation-delay: 0s;
+    transition: none;
+  }
+  
+  .reset-animation.pulse-aura {
+    animation: none;
+    transform: scale(1);
+    transition: none;
   }
 }
