@@ -24,6 +24,7 @@ export const DataBr = {
       "SQL",
       "Git",
       "React",
+      "Python"
     ],
     softSkills: [
       "Programação.",
@@ -109,4 +110,13 @@ export const DataBr = {
       }
     ],
   },
+  titleExperience:{
+    label: 'Experiência'
+  },
+  titleProyects: {
+    label: 'Projetos',
+  },
+  titleAcademic: {
+    label: 'Formação',
+  }
 };

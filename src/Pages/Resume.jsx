@@ -28,13 +28,16 @@ export const Resume = ({ lang }) => {
     return () => media.removeEventListener("change", listener);
   }, [matches]);
 
-  const { profile, aboutMe, skills, socialMedia, experience } = dataSchema;
+  const { profile, aboutMe, skills, socialMedia, experience, titleAcademic, titleExperience, titleProyects } = dataSchema;
   const {
     profile: profileBr,
     aboutMe: aboutMeBr,
     skills: skillsBr,
     socialMedia: socialMediaBr,
     experience: experienceBr,
+    titleAcademic: titleAcademicBr,
+    titleExperience: titleExperienceBr,
+    titleProyects: titleProyectsBr
   } = ptBRContent;
 
   const content =
@@ -59,9 +62,9 @@ export const Resume = ({ lang }) => {
               <SocialMedia {...socialMediaBr} />
             </div>
             <div className="resume__right">
-              <Works {...experienceBr} />
-              <Academic {...experienceBr} />
-              <Proyects {...experienceBr} />
+              <Works {...titleExperienceBr} {...experienceBr} />
+              <Academic {...titleAcademicBr} {...experienceBr} />
+              <Proyects {...titleProyectsBr} {...experienceBr} />
             </div>
           </div>
         </main>
@@ -83,9 +86,9 @@ export const Resume = ({ lang }) => {
               <SocialMedia {...socialMedia} />
             </div>
             <div className="resume__right">
-              <Works {...experience} />
-              <Academic {...experience} />
-              <Proyects {...experience} />
+              <Works {...titleExperience} {...experience} />
+              <Academic {...titleAcademic} {...experience} />
+              <Proyects {...titleProyects} {...experience} />
             </div>
           </div>
         </main>

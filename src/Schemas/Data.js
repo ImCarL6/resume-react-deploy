@@ -24,6 +24,7 @@ export const Data = {
       "SQL",
       "Git",
       "React",
+      "Python"
     ],
     softSkills: [
       "Programming.",
@@ -109,4 +110,13 @@ export const Data = {
       }
     ],
   },
+  titleExperience:{
+    label: 'Experience'
+  },
+  titleProyects: {
+    label: 'Projects',
+  },
+  titleAcademic: {
+    label: 'Education',
+  }
 };
