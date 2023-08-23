@@ -184,47 +184,47 @@ body.dark-theme {
 
   @keyframes pulse-aura {
     0% {
-      transform: scale(1); /* Normal scale */
+      transform: scale(1); 
     }
     50% {
-      transform: scale(1.4); /* Enlarge to create the pulse effect */
+      transform: scale(1.4);
     }
     100% {
-      transform: scale(1); /* Back to normal scale */
+      transform: scale(1);
     }
   }
 
   .pulse-aura {
-    animation: pulse-aura 5s infinite; /* Apply the animation to the button */
-    animation-delay: 0s; /* Same animation delay for both buttons */
+    animation: pulse-aura 5s infinite; 
+    animation-delay: 0s; 
   }
 
   .reset-animation {
-    animation: none; /* Remove the current animation */
-    transform: scale(1); /* Reset the scale to normal */
-    transition: none; /* Remove transition effects */
+    animation: none; 
+    transform: scale(1); 
+    transition: none; 
   }
 
   .language-toggle-container {
     position: absolute;
-    top: 50px; /* Adjust this value as needed */
+    top: 50px; 
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
-    background-color: var(--container-color); /* Add this to match the background */
+    background-color: var(--container-color); 
     padding: 10px 15px; 
-    border-radius: 10px; /* Add border radius for the button container */
+    border-radius: 10px; 
   }
   
-  /* Styles for the button and its image */
+
   .btn-toggle-language {
     border: none;
     background: transparent;
     cursor: pointer;
     padding: 0;
     margin: 0;
-    width: 40px; /* Set a fixed width */
-    height: 40px; /* Set a fixed height */
+    width: 40px; 
+    height: 40px; 
   }
   
   .btn-toggle-language img {
@@ -241,20 +241,19 @@ body.dark-theme {
 .nav__toggle {
   position: fixed;
   bottom: 0;
-  left: 50%; /* Center horizontally */
+  left: 50%; 
   transform: translateX(-50%);
-  padding: 1rem; /* Add some padding for better visibility */
-  background-color: var(--body-color);
+  padding: 1rem; 
+  background-color: #4c4c4c;
   color: var(--title-color);
   font-weight: var(--font-medium);
   z-index: var(--z-fixed);
   cursor: pointer;
-  width: 100%; /* Make them full width */
-  text-align: center; /* Center the content */
+  width: 100%; 
+  text-align: center; 
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Style changes on hover */
 .nav__logo:hover,
 .nav__toggle:hover {
   background-color: var(--title-color);
@@ -513,7 +512,6 @@ body.dark-theme {
     margin-right: auto;
   }
 
-  /* .l-header, */
   .scrolltop {
     display: none;
   }
@@ -626,24 +624,24 @@ body.dark-theme {
   
   .language-toggle-container {
     position: absolute;
-    top: 50px; /* Adjust this value as needed */
+    top: 50px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
-    background-color: var(--container-color); /* Add this to match the background */
+    background-color: var(--container-color); 
     padding: 10px 15px; 
-    border-radius: 10px; /* Add border radius for the button container */
+    border-radius: 10px; 
   }
   
-  /* Styles for the button and its image */
+
   .btn-toggle-language {
     border: none;
     background: transparent;
     cursor: pointer;
     padding: 0;
     margin: 0;
-    width: 40px; /* Set a fixed width */
-    height: 40px; /* Set a fixed height */
+    width: 40px; 
+    height: 40px; 
   }
   
   .btn-toggle-language img {
