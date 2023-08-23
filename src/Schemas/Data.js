@@ -45,7 +45,7 @@ export const Data = {
         className: "bxl-linkedin-square",
       },
       {
-        label: "Carlos Silva",
+        label: "ImCarL6",
         name: "github",
         url: "https://github.com/ImCarL6",
         className: "bxl-github",

@@ -565,4 +565,28 @@ body.dark-theme {
     outline: none;
     font-family: var(--body-font);
   }
+
+  .btn-toggle-language {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .btn-toggle-language img {
+    width: 30px;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .btn-toggle-language:hover img {
+    transform: scale(1.1);
+  }
+
+  .language-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+  }
 }
