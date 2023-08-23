@@ -204,6 +204,15 @@ body.dark-theme {
     transform: scale(1); /* Reset the scale to normal */
     transition: none; /* Remove transition effects */
   }
+
+  .language-toggle-container {
+    margin: 1rem 0; /* Adjust margin for mobile view */
+  }
+
+  .btn-toggle-language {
+    width: 30px; /* Adjust width for mobile view */
+    height: 30px; /* Adjust height for mobile view */
+  }
 }
 
 .nav__logo,
@@ -566,27 +575,30 @@ body.dark-theme {
     font-family: var(--body-font);
   }
 
+  .language-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0; /* Add margin to create space between button and main content */
+  }
+  
+  /* Styles for the button and its image */
   .btn-toggle-language {
     border: none;
     background: transparent;
     cursor: pointer;
     padding: 0;
     margin: 0;
+    width: 40px; /* Set a fixed width */
+    height: 40px; /* Set a fixed height */
   }
   
   .btn-toggle-language img {
-    width: 30px;
-    height: auto;
+    width: 100%;
+    height: 100%;
     transition: transform 0.3s ease-in-out;
   }
   
   .btn-toggle-language:hover img {
     transform: scale(1.1);
-  }
-
-  .language-toggle-container {
-    display: flex;
-    justify-content: center;
-    margin: 1rem;
   }
 }
