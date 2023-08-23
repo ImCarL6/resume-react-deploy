@@ -14,6 +14,7 @@ import { Data as dataSchema } from "../Schemas/Data";
 import { DataBr as ptBRContent } from "../Schemas/DataBr";
 import { Menu as menuSchema } from "../Schemas/Menu";
 import { LanguageToggleBr } from "../Components/ButtonBr";
+import { LanguageToggleEn } from "../Components/ButtonEn";
 
 export const Resume = ({ lang }) => {
   console.log(lang)
@@ -41,6 +42,7 @@ export const Resume = ({ lang }) => {
       <>
         <div className="language-toggle-container">
           <LanguageToggleBr />
+          <LanguageToggleEn />
         </div>
         <SEO {...profileBr} {...aboutMeBr} />
         {!matches && <Menu {...menuSchema} />}
@@ -68,6 +70,7 @@ export const Resume = ({ lang }) => {
       <>
         <div className="language-toggle-container">
           <LanguageToggleBr />
+          <LanguageToggleEn />
         </div>
         <SEO {...profile} {...aboutMe} />
         {!matches && <Menu {...menuSchema} />}
