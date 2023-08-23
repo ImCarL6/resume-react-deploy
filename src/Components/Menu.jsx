@@ -10,9 +10,8 @@ export const Menu = ({ menu }) => {
   };
 
   return (
-    <header className="l-header" id="header">
+    <div>
       <nav className="nav bd-container">
-        <span className="nav__logo">Menu</span>
         <div className={show ? "nav__menu show-menu" : "nav__menu"} id="nav-menu">
           <ul className="nav__list">
             {menu.map(({ label, section, className }) => (
@@ -30,10 +29,11 @@ export const Menu = ({ menu }) => {
             ))}
           </ul>
         </div>
-        <div className="nav__toggle" id="nav-toggle" onClick={() => setShow(!show)}>
-          <i className="bx bx-grid-alt" />
-        </div>
       </nav>
-    </header>
+      <span className="nav__logo">Menu</span>
+      <div className="nav__toggle" id="nav-toggle" onClick={() => setShow(!show)}>
+        <i className="bx bx-grid-alt" />
+      </div>
+    </div>
   );
 };
