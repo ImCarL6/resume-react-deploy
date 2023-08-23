@@ -143,6 +143,7 @@ body.dark-theme {
   width: calc(100% - 3rem);
   margin-left: var(--mb-3);
   margin-right: var(--mb-3);
+  margin-top: 150px; /* Increase this value to create more space above the content */
 }
 
 .bd-grid {
@@ -206,12 +207,35 @@ body.dark-theme {
   }
 
   .language-toggle-container {
-    margin: 1rem 0; /* Adjust margin for mobile view */
+    position: absolute;
+    top: 50px; /* Adjust this value as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background-color: var(--container-color); /* Add this to match the background */
+    padding: 10px 15px; 
+    border-radius: 10px; /* Add border radius for the button container */
   }
-
+  
+  /* Styles for the button and its image */
   .btn-toggle-language {
-    width: 30px; /* Adjust width for mobile view */
-    height: 30px; /* Adjust height for mobile view */
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    width: 40px; /* Set a fixed width */
+    height: 40px; /* Set a fixed height */
+  }
+  
+  .btn-toggle-language img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .btn-toggle-language:hover img {
+    transform: scale(1.1);
   }
 }
 
@@ -522,7 +546,7 @@ body.dark-theme {
     border-radius: 0.25rem;
     transition: border-color 0.3s;
   }
-  
+
   .button-indicator:hover {
     border-color: var(--title-color);
   }
@@ -538,7 +562,7 @@ body.dark-theme {
     animation-delay: 0s;
     transition: none;
   }
-  
+
   .reset-animation.pulse-aura {
     animation: none;
     transform: scale(1);
@@ -550,7 +574,7 @@ body.dark-theme {
     display: inline-grid;
     text-align: center;
   }
-  
+
   .generate__btn {
     display: inline-block;
     border: 2px solid var(--text-color);
@@ -560,12 +584,12 @@ body.dark-theme {
     transition: 0.3s;
     font-weight: var(--font-medium);
   }
-  
+
   .generate__btn:hover {
     background-color: var(--text-color);
     color: var(--container-color);
   }
-  
+
   button.generate__btn {
     background-color: Transparent;
     background-repeat: no-repeat;
@@ -574,11 +598,16 @@ body.dark-theme {
     outline: none;
     font-family: var(--body-font);
   }
-
+  
   .language-toggle-container {
-    display: flex;
-    justify-content: center;
-    margin: 1rem 0; /* Add margin to create space between button and main content */
+    position: absolute;
+    top: 50px; /* Adjust this value as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background-color: var(--container-color); /* Add this to match the background */
+    padding: 10px 15px; 
+    border-radius: 10px; /* Add border radius for the button container */
   }
   
   /* Styles for the button and its image */
@@ -601,4 +630,5 @@ body.dark-theme {
   .btn-toggle-language:hover img {
     transform: scale(1.1);
   }
+  
 }
