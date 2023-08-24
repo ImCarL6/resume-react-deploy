@@ -9,7 +9,6 @@ export const GenerateCV = ({ email, location, telephone, social }) => {
   const [infoNodesText, setInfoNodesText] = useState([]);
   const [socialNodes, setSocialNodes] = useState([]);
   const [socialNodesText, setSocialNodesText] = useState([]);
-  const [changeBodyColor, setChangeBodyColor] = useState(true); // New state variable
 
   const generateResume = async () => {
     const originalViewportWidth = window.innerWidth;
@@ -19,15 +18,29 @@ export const GenerateCV = ({ email, location, telephone, social }) => {
     window.innerHeight = 768;
 
     prepareResume();
+
+    const currentResourceURL = window.location.pathname;
+    const isBRPage = currentResourceURL.includes("/br");
+
     const rootCV = document.getElementById("area-cv");
     const canvasCV = await html2canvas(rootCV).catch((e) => console.error(e));
     const imageCV = canvasCV.toDataURL("image/png");
-    const pdf = new jsPDF({ format: [430, 255] });
-    pdf.addImage(imageCV, "PNG", 0, 0);
+
+    let pdf;
+    let starterPositionY;
+
+    if (isBRPage) {
+      pdf = new jsPDF({ format: [450, 255] });
+      starterPositionY = 436;
+    } else {
+      pdf = new jsPDF({ format: [430, 255] });
+      starterPositionY = 418;
+    }
 
     window.innerWidth = originalViewportWidth;
     window.innerHeight = originalViewportHeight;
 
+    pdf.addImage(imageCV, "PNG", 0, 0);
     pdf.addFileToVFS("poppins-Medium.ttf", POPPINS_FONT_B64);
     pdf.addFont("poppins-Medium.ttf", "POPPINS_FONT_B64", "normal");
     pdf.setFont("POPPINS_FONT_B64");
@@ -40,21 +53,17 @@ export const GenerateCV = ({ email, location, telephone, social }) => {
     pdf.text(telephone, 15, 92);
 
     const starterPositionX = 15;
-    let starterPositionY = 418;
-
     const sectionTitleElement = document.querySelector(
       ".social.section .section-title"
     );
 
     if (sectionTitleElement) {
-      const sectionTitleHeight = sectionTitleElement.offsetHeight;
-
       social.forEach((socialProp) => {
         pdf.textWithLink(socialProp.label, starterPositionX, starterPositionY, {
           url: socialProp.url,
         });
 
-        starterPositionY += sectionTitleHeight < 30 ? 5 : 8;
+        starterPositionY += 9;
       });
     }
 
