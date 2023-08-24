@@ -17,7 +17,6 @@ import { LanguageToggleBr } from "../Components/ButtonBr";
 import { LanguageToggleEn } from "../Components/ButtonEn";
 
 export const Resume = ({ lang }) => {
-  console.log(lang)
   const query = "(min-width: 968px)";
   const [matches, setMatches] = useState(window.matchMedia(query).matches);
 
