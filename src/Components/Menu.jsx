@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 export const Menu = ({ menu }) => {
   const [show, setShow] = useState(false);
 
-  const _handleActiveSection = (e) => {
-    window.location.hash = e.target.hash;
+  const _handleActiveSection = () => {
     setShow(!show);
   };
 
@@ -16,15 +16,15 @@ export const Menu = ({ menu }) => {
           <ul className="nav__list">
             {menu.map(({ label, section, className }) => (
               <li className="nav__item" key={label}>
-                <NavLink
+                <HashLink
                   className="nav__link"
                   activeClassName="active-link"
                   onClick={_handleActiveSection}
-                  to={{ pathname: "/", hash: section }}
-                  isActive={(m, l) => (l.hash === section ? true : false)}
+                  smooth
+                  to={`/${section}`}
                 >
                   <i className={`bx ${className} nav__icon`} /> {label}
-                </NavLink>
+                </HashLink>
               </li>
             ))}
           </ul>
@@ -34,6 +34,7 @@ export const Menu = ({ menu }) => {
       <div className="nav__toggle" id="nav-toggle" onClick={() => setShow(!show)}>
         <i className="bx bx-grid-alt" />
       </div>
+      <Outlet /> {/* Add the Outlet here */}
     </div>
   );
 };

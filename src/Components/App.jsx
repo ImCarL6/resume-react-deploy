@@ -1,18 +1,12 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom"; // Import Outlet and Routes
 import { Resume } from "../Pages/Resume";
 
 export const App = () => {
   return (
-    <Router>
-      <Switch>
-        <Route path="/br">
-          <Resume lang="br" />
-        </Route>
-        <Route path="/">
-          <Resume />
-        </Route>
-      </Switch>
-    </Router>
+    <Routes>
+      <Route path="/br" element={<Resume lang="br" />} />
+      <Route path="/" element={<Resume />} />
+    </Routes>
   );
 };

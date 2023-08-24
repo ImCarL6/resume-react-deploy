@@ -1,12 +1,11 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const LanguageToggleEn = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const changeLanguage = () => {
-    history.push("/");
-    window.location.reload();
+    navigate("/");
   };
 
   return (
