@@ -6,10 +6,6 @@ import "./App.css";
 
 import { App } from "./Components/App";
 
-import { inject } from '@vercel/analytics';
- 
-inject();
-
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
