@@ -1,75 +1,80 @@
 import React, { useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import axios from "axios";
 
 import { POPPINS_FONT_B64 } from "../Utils/Constants";
 
-export const GenerateCV = ({ email, location, telephone, social, isMobileView }) => {
+export const GenerateCV = ({
+  email,
+  location,
+  telephone,
+  social,
+  isMobileView,
+}) => {
   const [infoNodes, setInfoNodes] = useState([]);
   const [infoNodesText, setInfoNodesText] = useState([]);
   const [socialNodes, setSocialNodes] = useState([]);
   const [socialNodesText, setSocialNodesText] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [downloadUrl, setDownloadUrl] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [downloadUrl, setDownloadUrl] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const generateResume = async () => {
     const currentResourceURL = window.location.pathname;
     const isBRPage = currentResourceURL.includes("/br");
 
-    if (isMobileView){
-      setIsLoading(true)
+    if (isMobileView) {
+      setIsLoading(true);
 
-      const response = await fetch('http://localhost:3000/generate-pdf')
-      const fileUrl = await response.text()
+      try {
+        const response = await axios.get("https://carlos-cv-generator.cyclic.app/generate-pdf", {
+          params: { language: isBRPage === true ? "br" : "" },
+        });
+        const fileUrl = await response.data;
 
-      if (![200].includes(response.status)){
-        let defaultPdfUrl = await fetch('http://localhost:3000/default-pdf')
-        let defaultUrl = await defaultPdfUrl.text()
+        console.log(response.status)
 
-        try {
+        console.log(fileUrl)
+
+        if (![200].includes(response.status)) {
+          const defaultPdfUrl = await axios.get(
+            "https://carlos-cv-generator.cyclic.app/default-pdf"
+          );
+          const defaultUrl = await defaultPdfUrl.data;
+
           setDownloadUrl(defaultUrl);
           window.location.href = defaultUrl;
-        } catch (error) {
-          console.error('Error getting signed URL:', error);
-        }
-    
-        setIsLoading(false);
-        setSuccessMessage('Successfully generated!');
-        setTimeout(() => {
-          setSuccessMessage('');
-        }, 5500);
-      } else {
-        try {
+        } else {
           setDownloadUrl(fileUrl);
           window.location.href = fileUrl;
-        } catch (error) {
-          console.error('Error getting signed URL:', error);
         }
-    
+
         setIsLoading(false);
-        setSuccessMessage('Successfully generated!');
+        setSuccessMessage("Successfully generated!");
         setTimeout(() => {
-          setSuccessMessage('');
+          setSuccessMessage("");
         }, 5500);
+      } catch (error) {
+        console.error("Error generating PDF:", error);
+        setIsLoading(false);
       }
     } else {
-
       const originalViewportWidth = window.innerWidth;
       const originalViewportHeight = window.innerHeight;
-  
+
       window.innerWidth = 1366;
       window.innerHeight = 768;
-  
+
       prepareResume();
-  
+
       const rootCV = document.getElementById("area-cv");
       const canvasCV = await html2canvas(rootCV).catch((e) => console.error(e));
       const imageCV = canvasCV.toDataURL("image/png");
-  
+
       let pdf;
       let starterPositionY;
-  
+
       if (isBRPage) {
         pdf = new jsPDF({ format: [450, 255] });
         starterPositionY = 436;
@@ -77,10 +82,10 @@ export const GenerateCV = ({ email, location, telephone, social, isMobileView })
         pdf = new jsPDF({ format: [430, 255] });
         starterPositionY = 418;
       }
-  
+
       window.innerWidth = originalViewportWidth;
       window.innerHeight = originalViewportHeight;
-  
+
       pdf.addImage(imageCV, "PNG", 0, 0);
       pdf.addFileToVFS("poppins-Medium.ttf", POPPINS_FONT_B64);
       pdf.addFont("poppins-Medium.ttf", "POPPINS_FONT_B64", "normal");
@@ -90,37 +95,40 @@ export const GenerateCV = ({ email, location, telephone, social, isMobileView })
       );
       pdf.setFontSize(11);
 
-      if(isBRPage){
+      if (isBRPage) {
         pdf.text(location, 15, 77);
         pdf.text(email, 15, 87);
-        pdf.text(telephone, 15, 97  );
+        pdf.text(telephone, 15, 97);
       } else {
         pdf.text(location, 15, 72);
         pdf.text(email, 15, 82);
         pdf.text(telephone, 15, 92);
       }
 
-  
       const starterPositionX = 15;
       const sectionTitleElement = document.querySelector(
         ".social.section .section-title"
       );
-  
+
       if (sectionTitleElement) {
         social.forEach((socialProp) => {
-          pdf.textWithLink(socialProp.label, starterPositionX, starterPositionY, {
-            url: socialProp.url,
-          });
-  
+          pdf.textWithLink(
+            socialProp.label,
+            starterPositionX,
+            starterPositionY,
+            {
+              url: socialProp.url,
+            }
+          );
+
           starterPositionY += 9;
         });
       }
-  
+
       rollbackResume();
-  
+
       pdf.save("resume.pdf");
     }
-
   };
 
   const prepareResume = () => {
