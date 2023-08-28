@@ -20,21 +20,39 @@ export const GenerateCV = ({ email, location, telephone, social, isMobileView })
     if (isMobileView){
       setIsLoading(true)
 
-      const response = await fetch('https://carlos-cv-generator.cyclic.app/generate-pdf')
+      const response = await fetch('http://localhost:3000/generate-pdf')
       const fileUrl = await response.text()
-  
-      try {
-        setDownloadUrl(fileUrl);
-        window.location.href = fileUrl;
-      } catch (error) {
-        console.error('Error getting signed URL:', error);
+
+      if (![200].includes(response.status)){
+        let defaultPdfUrl = await fetch('http://localhost:3000/default-pdf')
+        let defaultUrl = await defaultPdfUrl.text()
+
+        try {
+          setDownloadUrl(defaultUrl);
+          window.location.href = defaultUrl;
+        } catch (error) {
+          console.error('Error getting signed URL:', error);
+        }
+    
+        setIsLoading(false);
+        setSuccessMessage('Successfully generated!');
+        setTimeout(() => {
+          setSuccessMessage('');
+        }, 5500);
+      } else {
+        try {
+          setDownloadUrl(fileUrl);
+          window.location.href = fileUrl;
+        } catch (error) {
+          console.error('Error getting signed URL:', error);
+        }
+    
+        setIsLoading(false);
+        setSuccessMessage('Successfully generated!');
+        setTimeout(() => {
+          setSuccessMessage('');
+        }, 5500);
       }
-  
-      setIsLoading(false);
-      setSuccessMessage('Successfully generated!');
-      setTimeout(() => {
-        setSuccessMessage('');
-      }, 5500);  
     } else {
 
       const originalViewportWidth = window.innerWidth;
@@ -71,9 +89,17 @@ export const GenerateCV = ({ email, location, telephone, social, isMobileView })
         document.body.classList.contains("dark-theme") ? "#b5c4db" : "#4c566a"
       );
       pdf.setFontSize(11);
-      pdf.text(location, 15, 72);
-      pdf.text(email, 15, 82);
-      pdf.text(telephone, 15, 92);
+
+      if(isBRPage){
+        pdf.text(location, 15, 77);
+        pdf.text(email, 15, 87);
+        pdf.text(telephone, 15, 97  );
+      } else {
+        pdf.text(location, 15, 72);
+        pdf.text(email, 15, 82);
+        pdf.text(telephone, 15, 92);
+      }
+
   
       const starterPositionX = 15;
       const sectionTitleElement = document.querySelector(
