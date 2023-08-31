@@ -19,18 +19,31 @@ export const GenerateCV = ({
   const [isLoading, setIsLoading] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [progressWidth, setProgressWidth] = useState(0);
+  const [showProgressBar, setShowProgressBar] = useState(false);
 
   const generateResume = async () => {
     const currentResourceURL = window.location.pathname;
-    const cloudPDF =
-      "https://2zu9qsqb6l.execute-api.sa-east-1.amazonaws.com/prod/pdf-generator";
+    const cloudPDF = import.meta.env.VITE_AWS_ENDPOINT;
     const isBRPage = currentResourceURL.includes("/br");
+    const isDarkTheme = document.body.classList.contains("dark-theme") ? "#b5c4db" : "#4c566a";
 
     if (isMobileView) {
       setIsLoading(true);
 
       try {
-        const response = await axios.post(cloudPDF, { language: isBRPage ? 'br' : '' });
+        setShowProgressBar(true)
+
+        const progressInterval = setInterval(() => {
+          setProgressWidth((prevWidth) => prevWidth + 0.6);
+        }, 100);
+
+        await new Promise((resolve) => setTimeout(resolve, 7000));
+
+        const response = await axios.post(cloudPDF, {
+          language: isBRPage ? "br" : "",
+          darkTheme: isDarkTheme
+        });
         const { url } = await response.data;
 
         if (![200].includes(response.status)) {
@@ -44,6 +57,11 @@ export const GenerateCV = ({
           window.location.href = defaultUrl;
         } else {
           setDownloadUrl(url);
+
+          clearInterval(progressInterval);
+          setProgressWidth(0);
+          setShowProgressBar(false);
+
           window.location.href = url;
         }
 
@@ -55,6 +73,7 @@ export const GenerateCV = ({
       } catch (error) {
         console.error("Error generating PDF:", error);
         setIsLoading(false);
+        setProgressWidth(0);
       }
     } else {
       const originalViewportWidth = window.innerWidth;
@@ -88,7 +107,7 @@ export const GenerateCV = ({
       pdf.addFont("poppins-Medium.ttf", "POPPINS_FONT_B64", "normal");
       pdf.setFont("POPPINS_FONT_B64");
       pdf.setTextColor(
-        document.body.classList.contains("dark-theme") ? "#b5c4db" : "#4c566a"
+        isBRPage ? "#b5c4db" : "#4c566a"
       );
       pdf.setFontSize(11);
 
@@ -174,8 +193,16 @@ export const GenerateCV = ({
         onClick={generateResume}
         disabled={isLoading}
       >
-        {isLoading ? "Generating resume..." : "Download CV"}
+        {isLoading ? "Downloading..." : "Download CV"}
       </button>
+      {showProgressBar && (
+        <div className="progress-bar">
+          <div
+            className="progress-bar-fill"
+            style={{ width: `${progressWidth}%` }}
+          ></div>
+        </div>
+      )}
       {successMessage && <p className="success-message">{successMessage}</p>}
     </div>
   );
