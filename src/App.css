@@ -297,6 +297,18 @@ button.generate__btn {
     margin-right: var(--mb-3);
     margin-top: 50px;
   }
+
+  .progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #ccc;
+  }
+  
+  .progress-bar-fill {
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.3s;
+  }
 }
 
 .nav__toggle {
@@ -680,5 +692,14 @@ button.generate__btn {
 
   .btn-toggle-language:hover img {
     transform: scale(1.1);
+  }
+
+  @keyframes fillAnimation {
+    0% {
+      background-size: 0% 100%;
+    }
+    100% {
+      background-size: 100% 100%;
+    }
   }
 }

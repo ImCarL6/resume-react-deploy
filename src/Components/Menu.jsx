@@ -18,7 +18,7 @@ export const Menu = ({ menu }) => {
               <li className="nav__item" key={label}>
                 <HashLink
                   className="nav__link"
-                  activeClassName="active-link"
+                  activeclasscame="active-link"
                   onClick={_handleActiveSection}
                   smooth
                   to={`/${section}`}
