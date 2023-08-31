@@ -22,32 +22,29 @@ export const GenerateCV = ({
 
   const generateResume = async () => {
     const currentResourceURL = window.location.pathname;
+    const cloudPDF =
+      "https://2zu9qsqb6l.execute-api.sa-east-1.amazonaws.com/prod/pdf-generator";
     const isBRPage = currentResourceURL.includes("/br");
 
     if (isMobileView) {
       setIsLoading(true);
 
       try {
-        const response = await axios.get("https://carlos-cv-generator.cyclic.app/generate-pdf", {
-          params: { language: isBRPage === true ? "br" : "" },
-        });
-        const fileUrl = await response.data;
-
-        console.log(response.status)
-
-        console.log(fileUrl)
+        const response = await axios.post(cloudPDF, { language: isBRPage ? 'br' : '' });
+        const { url } = await response.data;
 
         if (![200].includes(response.status)) {
-          const defaultPdfUrl = await axios.get(
-            "https://carlos-cv-generator.cyclic.app/default-pdf"
-          );
+          const defaultPdfUrl = await axios.post(cloudPDF, {
+            language: null,
+            defaultPdf: true,
+          });
           const defaultUrl = await defaultPdfUrl.data;
 
           setDownloadUrl(defaultUrl);
           window.location.href = defaultUrl;
         } else {
-          setDownloadUrl(fileUrl);
-          window.location.href = fileUrl;
+          setDownloadUrl(url);
+          window.location.href = url;
         }
 
         setIsLoading(false);
