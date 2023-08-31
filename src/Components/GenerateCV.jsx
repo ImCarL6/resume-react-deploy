@@ -42,7 +42,7 @@ export const GenerateCV = ({
 
         const response = await axios.post(cloudPDF, {
           language: isBRPage ? "br" : "",
-          darkTheme: isDarkTheme
+          darkTheme: isDarkTheme === '#b5c4db' ? true : false
         });
         const { url } = await response.data;
 
